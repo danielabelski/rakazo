@@ -90,7 +90,11 @@ export function ChoiceCard({
                 <span
                   className={`flex-1 text-[15px] leading-[1.35] ${block.answerId ? "text-foreground/75" : "text-foreground"}`}
                 >
-                  <OnboardingFocusOptionLabel id={option.id} label={option.label} />
+                  <OnboardingFocusOptionLabel
+                    id={option.id}
+                    label={option.label}
+                    question={block.question}
+                  />
                 </span>
                 {block.answerId === option.id ? (
                   <span className="mt-0.5 text-foreground/75">✓</span>
@@ -112,7 +116,16 @@ function OnboardingFocusQuestion({ question }: { question: string }) {
   return question;
 }
 
-function OnboardingFocusOptionLabel({ id, label }: { id: string; label: string }) {
+function OnboardingFocusOptionLabel({
+  id,
+  label,
+  question,
+}: {
+  id: string;
+  label: string;
+  question: string;
+}) {
+  if (question !== "What do you want me on first?") return label;
   switch (id) {
     case "day":
       return <Trans>Day-to-day work</Trans>;
